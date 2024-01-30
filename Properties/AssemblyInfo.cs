@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using MelonLoader;
 using ColorScreenMod; // The namespace of your mod class
 // ...
-[assembly: MelonInfo(typeof(main), "Color Screen", "1.0.1", "UlvakSkillz")]
+[assembly: MelonInfo(typeof(main), "Color Screen", "1.0.3", "UlvakSkillz")]
 [assembly: MelonGame("Buckethead Entertainment", "RUMBLE")]
 
 // General Information about an assembly is controlled through the following
