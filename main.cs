@@ -167,7 +167,8 @@ namespace ColorScreenMod
 				cube.GetComponent<MeshRenderer>().material.SetFloat("_METALLICSPECGLOSSMAP", 0f);
 				GameObject localHealthBar = GameObject.Find("Health/Local");
 				PlayerManager playerManager = GameObject.Find("Game Instance/Initializable/PlayerManager").GetComponent<PlayerManager>();
-				cube.transform.position = localHealthBar.transform.position;
+				cube.transform.position = playerManager.localPlayer.Controller.gameObject.transform.GetChild(2).GetChild(13).GetChild(0).gameObject.transform.position;
+				cube.transform.position = new Vector3(cube.transform.position.x, cube.transform.position.y - 0.102f, cube.transform.position.z);
 				cube.transform.localScale = new Vector3(1000, 0.01f, 1000);
 				cube.SetActive(true);
 			}
