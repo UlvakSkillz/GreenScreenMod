@@ -1,15 +1,17 @@
 ﻿using MelonLoader;
 using RUMBLE.Managers;
 using System;
+using System.Collections;
+using System.IO;
 using UnityEngine;
 
 namespace ColorScreenMod
 {
 	public class main : MelonMod
 	{
-		private string settingsFile = @"UserData\ColorScreen\Color.txt";
-		public static main _instance;
-		private string currentScene = "";
+		private string FILEPATH = @"UserData\ColorScreen";
+		private string FILENAME = @"Color.txt";
+		private string currentScene = "Loader";
 		private bool sceneChanged = false;
 		private bool gKeyReleased = true;
 		private bool gKeyPressed = false;
@@ -22,9 +24,57 @@ namespace ColorScreenMod
 		Material material;
 		Shader shader;
 
-		public override void OnEarlyInitializeMelon()
+		public override void OnLateInitializeMelon()
 		{
-			_instance = this;
+			MelonCoroutines.Start(CheckIfFileExists(FILEPATH, FILENAME));
+		}
+
+		public IEnumerator CheckIfFileExists(string filePath, string fileName)
+		{
+			if (!File.Exists($"{filePath}\\{fileName}"))
+			{
+				if (!Directory.Exists(filePath))
+				{
+					MelonLogger.Msg($"Folder Not Found, Creating Folder: {filePath}");
+					Directory.CreateDirectory(filePath);
+				}
+				if (!File.Exists($"{filePath}\\{fileName}"))
+				{
+					MelonLogger.Msg($"Creating File {filePath}\\{fileName}");
+					File.Create($"{filePath}\\{fileName}");
+				}
+				wallColor = new Vector3(255, 68, 237);
+				floorColor = new Vector3(255, 68, 237);
+				for (int i = 0; i < 60; i++) { yield return new WaitForFixedUpdate(); }
+				string[] newFileText = new string[8];
+				newFileText[0] = "Screen Color:";
+				newFileText[1] = "255";
+				newFileText[2] = "68";
+				newFileText[3] = "237";
+				newFileText[4] = "Floor Color:";
+				newFileText[5] = "255";
+				newFileText[6] = "68";
+				newFileText[7] = "237";
+				File.WriteAllLines($"{filePath}\\{fileName}", newFileText);
+            }
+            else
+			{
+				try
+				{
+					string[] fileContents = File.ReadAllLines($"{filePath}\\{fileName}");
+					wallColor = new Vector3(Int32.Parse(fileContents[1]), Int32.Parse(fileContents[2]), Int32.Parse(fileContents[3]));
+					MelonLogger.Msg($"Wall Color Loaded | R: {wallColor.x} | G: {wallColor.y} | B: {wallColor.z}");
+					floorColor = new Vector3(Int32.Parse(fileContents[5]), Int32.Parse(fileContents[6]), Int32.Parse(fileContents[7]));
+					MelonLogger.Msg($"Floor Color Loaded | R: {floorColor.x} | G: {floorColor.y} | B: {floorColor.z}");
+				}
+				catch
+				{
+					MelonLogger.Error($"Error Reading {filePath}\\{fileName} | Setting to Blue");
+					wallColor = new Vector3(0, 0, 255);
+					floorColor = new Vector3(0, 0, 255);
+				}
+			}
+			yield return null;
 		}
 
 		public override void OnSceneWasLoaded(int buildIndex, string sceneName)
@@ -35,7 +85,7 @@ namespace ColorScreenMod
 
         public override void OnUpdate()
 		{
-			if ((currentScene != "Park") && (currentScene != "Gym"))
+			if ((currentScene == "Loader"))
 			{
 				return;
 			}
@@ -63,33 +113,6 @@ namespace ColorScreenMod
 		{
 			if (sceneChanged)
 			{
-				if (currentScene == "Loader")
-				{
-					//read color File
-					if (System.IO.File.Exists(settingsFile))
-					{
-						try
-						{
-							string[] fileContents = System.IO.File.ReadAllLines(settingsFile);
-							wallColor = new Vector3(Int32.Parse(fileContents[1]), Int32.Parse(fileContents[2]), Int32.Parse(fileContents[3]));
-							MelonLogger.Msg($"Wall Color Loaded | R: {wallColor.x} | G: {wallColor.y} | B: {wallColor.z}");
-							floorColor = new Vector3(Int32.Parse(fileContents[5]), Int32.Parse(fileContents[6]), Int32.Parse(fileContents[7]));
-							MelonLogger.Msg($"Floor Color Loaded | R: {floorColor.x} | G: {floorColor.y} | B: {floorColor.z}");
-						}
-						catch
-						{
-							MelonLogger.Error($"Error Reading {settingsFile} | Setting to Blue");
-							wallColor = new Vector3(0, 0, 255);
-							floorColor = new Vector3(0, 0, 255);
-						}
-					}
-					else
-					{
-						MelonLogger.Error($"File not Found: {settingsFile} | Setting to Blue");
-						wallColor = new Vector3(0, 0, 255);
-						floorColor = new Vector3(0, 0, 255);
-					}
-				}
 				if (currentScene == "Gym")
                 {
 					//save shader and material to use for in other scenes
