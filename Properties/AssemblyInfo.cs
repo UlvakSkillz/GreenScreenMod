@@ -4,11 +4,11 @@ using MelonLoader;
 using ColorScreenMod; // The namespace of your mod class
 using System;
 // ...
-[assembly: MelonInfo(typeof(main), "Color Screen", "1.2.0", "UlvakSkillz")]
+[assembly: MelonInfo(typeof(main), "Color Screen", "2.1.1", "UlvakSkillz")]
 [assembly: MelonGame("Buckethead Entertainment", "RUMBLE")]
-[assembly: MelonColor(ConsoleColor.Magenta)]
-[assembly: MelonAuthorColor(ConsoleColor.Magenta)]
-[assembly: VerifyLoaderVersion(0, 5, 7)]
+[assembly: MelonColor(255, 195, 0, 255)]
+[assembly: MelonAuthorColor(255, 195, 0, 255)]
+[assembly: VerifyLoaderVersion(0, 6, 2, true)]
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
