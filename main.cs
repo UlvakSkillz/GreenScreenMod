@@ -150,7 +150,7 @@ namespace ColorScreenMod
 				cube.GetComponent<MeshRenderer>().material.color = new Color(wallColor.x / 255, wallColor.y / 255, wallColor.z / 255, 1);
 				GameObject localHealthBar = GameObject.Find("Health/Local");
 				PlayerManager playerManager = PlayerManager.instance;
-				cube.transform.rotation = playerManager.localPlayer.Controller.gameObject.transform.GetChild(2).GetChild(12).transform.rotation;
+				cube.transform.rotation = playerManager.localPlayer.Controller.gameObject.transform.GetChild(5).GetChild(5).GetChild(0).transform.rotation;
 				cube.transform.position = localHealthBar.transform.position;
 				cube.transform.localScale = new Vector3(0.01f, 1000, 1000);
 				cube.SetActive(true);
@@ -172,7 +172,7 @@ namespace ColorScreenMod
 				cube.GetComponent<MeshRenderer>().material.color = new Color(floorColor.x / 255, floorColor.y / 255, floorColor.z / 255, 1);
 				GameObject localHealthBar = GameObject.Find("Health/Local");
 				PlayerManager playerManager = PlayerManager.instance;
-				cube.transform.position = playerManager.localPlayer.Controller.gameObject.transform.GetChild(2).GetChild(13).GetChild(0).gameObject.transform.position;
+				cube.transform.position = playerManager.localPlayer.Controller.gameObject.transform.GetChild(5).GetChild(5).GetChild(0).gameObject.transform.position;
 				cube.transform.position = new Vector3(cube.transform.position.x, cube.transform.position.y - 0.102f, cube.transform.position.z);
 				cube.transform.localScale = new Vector3(1000, 0.01f, 1000);
 				cube.SetActive(true);
