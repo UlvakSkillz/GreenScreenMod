@@ -74,7 +74,6 @@ C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Il2CppPhoton
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Il2CppPlayFab.dll
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Il2CppPhotonChat.dll
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Il2CppSmartLocalization.dll
-C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Il2CppRUMBLE.Rendering.dll
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Il2CppPhotonVoice.dll
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Il2CppRUMBLE.Platform.dll
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Il2CppRUMBLE.Platform.Info.Steam.dll
@@ -96,3 +95,4 @@ C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\UnityEngine.
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\MonoMod.Backports.dll
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\MonoMod.ILHelpers.dll
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\obj\Debug\ColorScr.62C4CF87.Up2Date
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\ModUI.dll

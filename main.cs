@@ -1,78 +1,80 @@
 ﻿using MelonLoader;
 using Il2CppRUMBLE.Managers;
 using System;
-using System.Collections;
-using System.IO;
 using UnityEngine;
+using RumbleModUI;
+using System.Globalization;
 
 namespace ColorScreenMod
 {
-	public class main : MelonMod
+    public static class BuildInfo
+    {
+        public const string ModName = "ColorSWcreen";
+        public const string ModVersion = "2.3.0";
+        public const string Author = "UlvakSkillz";
+    }
+    public class main : MelonMod
 	{
-		private string FILEPATH = @"UserData\ColorScreen";
-		private string FILENAME = @"Color.txt";
 		private string currentScene = "Loader";
 		private bool gKeyReleased = true;
-		private bool gKeyPressed = false;
 		private bool gScreenActive = false;
 		private bool fKeyReleased = true;
-		private bool fKeyPressed = false;
 		private bool fPlainActive = false;
-		private Vector3 wallColor;
-		private Vector3 floorColor;
+        private static string wallColorText = "FF44EC";
+        private static string floorColorText = "FF44EC";
+        private Color wallColor = hexToColor(wallColorText);
+        private Color floorColor = hexToColor(floorColorText);
+        private static Mod ColorScreen = new Mod();
 
-		public override void OnLateInitializeMelon()
-		{
-			MelonCoroutines.Start(CheckIfFileExists(FILEPATH, FILENAME));
+        private void UIInit()
+        {
+            ColorScreen.AddToList("Wall Color", "FF44EC", "Sets The Wall Color to the Supplied Color", new Tags { });
+            ColorScreen.AddToList("Floor Color", "FF44EC", "Sets The Floor Color to the Supplied Color", new Tags { });
+			ColorScreen.GetFromFile();
+            UI.instance.AddMod(ColorScreen);
+        }
+
+        public override void OnLateInitializeMelon()
+        {
+            ColorScreen.ModName = BuildInfo.ModName;
+            ColorScreen.ModVersion = BuildInfo.ModVersion;
+            ColorScreen.SetFolder(BuildInfo.ModName);
+            ColorScreen.ModSaved += Save;
+            UI.instance.UI_Initialized += UIInit;
+			Save();
 		}
 
-		public IEnumerator CheckIfFileExists(string filePath, string fileName)
+		private void Save()
 		{
-			if (!File.Exists($"{filePath}\\{fileName}"))
-			{
-				if (!Directory.Exists(filePath))
-				{
-					Log($"Folder Not Found, Creating Folder: {filePath}");
-					Directory.CreateDirectory(filePath);
-				}
-				if (!File.Exists($"{filePath}\\{fileName}"))
-				{
-					Log($"Creating File {filePath}\\{fileName}");
-					File.Create($"{filePath}\\{fileName}");
-				}
-				wallColor = new Vector3(255, 68, 237);
-				floorColor = new Vector3(255, 68, 237);
-				for (int i = 0; i < 60; i++) { yield return new WaitForFixedUpdate(); }
-				string[] newFileText = new string[8];
-				newFileText[0] = "Screen Color:";
-				newFileText[1] = "255";
-				newFileText[2] = "68";
-				newFileText[3] = "237";
-				newFileText[4] = "Floor Color:";
-				newFileText[5] = "255";
-				newFileText[6] = "68";
-				newFileText[7] = "237";
-				File.WriteAllLines($"{filePath}\\{fileName}", newFileText);
+			wallColorText = (string)ColorScreen.Settings[0].SavedValue;
+			floorColorText = (string)ColorScreen.Settings[1].SavedValue;
+            if (wallColorText.Length < 6)
+            {
+                Log("Wall Color too Short!");
+                wallColorText = "FF44EC";
+                ColorScreen.Settings[5].SavedValue = "FFFFFF";
+                ColorScreen.Settings[5].Value = "FFFFFF";
             }
-            else
-			{
-				try
-				{
-					string[] fileContents = File.ReadAllLines($"{filePath}\\{fileName}");
-					wallColor = new Vector3(Int32.Parse(fileContents[1]), Int32.Parse(fileContents[2]), Int32.Parse(fileContents[3]));
-					Log($"Wall Color Loaded | R: {wallColor.x} | G: {wallColor.y} | B: {wallColor.z}");
-					floorColor = new Vector3(Int32.Parse(fileContents[5]), Int32.Parse(fileContents[6]), Int32.Parse(fileContents[7]));
-					Log($"Floor Color Loaded | R: {floorColor.x} | G: {floorColor.y} | B: {floorColor.z}");
-				}
-				catch
-				{
-					MelonLogger.Error($"Error Reading {filePath}\\{fileName} | Setting to Blue");
-					wallColor = new Vector3(0, 0, 255);
-					floorColor = new Vector3(0, 0, 255);
-				}
-			}
-			yield return null;
-		}
+            if (floorColorText.Length < 6)
+            {
+                Log("Floor Color too Short!");
+                floorColorText = "FF44EC";
+                ColorScreen.Settings[6].SavedValue = "000000";
+                ColorScreen.Settings[6].Value = "000000";
+            }
+			wallColor = hexToColor(wallColorText);
+			floorColor = hexToColor(floorColorText);
+        }
+        public static Color hexToColor(string hex)
+        {
+            hex = hex.Replace("0x", "");//in case the string is formatted 0xFFFFFF
+            hex = hex.Replace("#", "");//in case the string is formatted #FFFFFF
+            byte a = 255;//assume fully visible unless specified in hex
+            byte r = byte.Parse(hex.Substring(0, 2), NumberStyles.HexNumber);
+            byte g = byte.Parse(hex.Substring(2, 2), NumberStyles.HexNumber);
+            byte b = byte.Parse(hex.Substring(4, 2), NumberStyles.HexNumber);
+            return new Color32(r, g, b, a);
+        }
 
 		public override void OnSceneWasLoaded(int buildIndex, string sceneName)
 		{
@@ -87,55 +89,39 @@ namespace ColorScreenMod
 			}
 			if ((Input.GetKeyDown(KeyCode.G)) && (gKeyReleased))
 			{
-				gKeyPressed = true;
 				gKeyReleased = false;
-			}
+                if (gScreenActive)
+                {
+                    GameObject.Destroy(GameObject.Find("ColorScreen"));
+                    gScreenActive = false;
+                }
+                else
+                {
+                    CreateWall();
+                    gScreenActive = true;
+                }
+            }
 			if ((Input.GetKeyUp(KeyCode.G)) && (!gKeyReleased))
 			{
 				gKeyReleased = true;
 			}
 			if ((Input.GetKeyDown(KeyCode.F)) && (fKeyReleased))
 			{
-				fKeyPressed = true;
 				fKeyReleased = false;
-			}
+                if (fPlainActive)
+                {
+                    GameObject.Destroy(GameObject.Find("ColorPlain"));
+                    fPlainActive = false;
+                }
+                else
+                {
+                    CreatePlane();
+                    fPlainActive = true;
+                }
+            }
 			if ((Input.GetKeyUp(KeyCode.F)) && (!fKeyReleased))
 			{
 				fKeyReleased = true;
-			}
-		}
-
-        public override void OnFixedUpdate()
-		{
-			//if G Pressed
-			if (gKeyPressed)
-			{
-				if (gScreenActive)
-				{
-					GameObject.Destroy(GameObject.Find("ColorScreen"));
-					gScreenActive = false;
-				}
-				else
-				{
-					CreateWall();
-					gScreenActive = true;
-				}
-				gKeyPressed = false;
-			}
-			//if F Pressed
-			if (fKeyPressed)
-			{
-				if (fPlainActive)
-				{
-					GameObject.Destroy(GameObject.Find("ColorPlain"));
-					fPlainActive = false;
-				}
-				else
-				{
-					CreatePlane();
-					fPlainActive = true;
-				}
-				fKeyPressed = false;
 			}
 		}
 
@@ -147,11 +133,10 @@ namespace ColorScreenMod
 				GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 				cube.name = "ColorScreen";
 				cube.GetComponent<Renderer>().material.shader = Shader.Find("Universal Render Pipeline/Lit");
-				cube.GetComponent<MeshRenderer>().material.color = new Color(wallColor.x / 255, wallColor.y / 255, wallColor.z / 255, 1);
-				GameObject localHealthBar = GameObject.Find("Health/Local");
+				cube.GetComponent<MeshRenderer>().material.color = wallColor;
 				PlayerManager playerManager = PlayerManager.instance;
-				cube.transform.rotation = playerManager.localPlayer.Controller.gameObject.transform.GetChild(5).GetChild(5).GetChild(0).transform.rotation;
-				cube.transform.position = localHealthBar.transform.position;
+				cube.transform.rotation = Quaternion.Euler(0, playerManager.localPlayer.Controller.gameObject.transform.GetChild(1).GetChild(0).GetChild(0).transform.rotation.eulerAngles.y, 0);
+				cube.transform.position = playerManager.localPlayer.Controller.gameObject.transform.GetChild(1).GetChild(0).GetChild(0).transform.position;
 				cube.transform.localScale = new Vector3(0.01f, 1000, 1000);
 				cube.SetActive(true);
 			}
@@ -169,7 +154,7 @@ namespace ColorScreenMod
 				GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 				cube.name = "ColorPlain";
 				cube.GetComponent<Renderer>().material.shader = Shader.Find("Universal Render Pipeline/Lit");
-				cube.GetComponent<MeshRenderer>().material.color = new Color(floorColor.x / 255, floorColor.y / 255, floorColor.z / 255, 1);
+				cube.GetComponent<MeshRenderer>().material.color = floorColor;
 				GameObject localHealthBar = GameObject.Find("Health/Local");
 				PlayerManager playerManager = PlayerManager.instance;
 				cube.transform.position = playerManager.localPlayer.Controller.gameObject.transform.GetChild(5).GetChild(5).GetChild(0).gameObject.transform.position;
