@@ -4,7 +4,7 @@ using MelonLoader;
 using ColorScreenMod; // The namespace of your mod class
 using System;
 // ...
-[assembly: MelonInfo(typeof(main), "Color Screen", "2.2.0", "UlvakSkillz")]
+[assembly: MelonInfo(typeof(main), BuildInfo.ModName, BuildInfo.ModVersion, BuildInfo.Author)]
 [assembly: MelonGame("Buckethead Entertainment", "RUMBLE")]
 [assembly: MelonColor(255, 195, 0, 255)]
 [assembly: MelonAuthorColor(255, 195, 0, 255)]

@@ -96,3 +96,17 @@ C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\MonoMod.Back
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\MonoMod.ILHelpers.dll
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\obj\Debug\ColorScr.62C4CF87.Up2Date
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\ModUI.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Il2CppLIV.LCK.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Il2CppLIV.NativeAudioBridge.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Il2CppSystem.Net.Http.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Il2CppNativeGallery.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Il2CppNewtonsoft.Json.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Unity.VisualEffectGraph.Runtime.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Unity.RenderPipelines.GPUDriven.Runtime.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Unity.Collections.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\UnityEngine.UnityAnalyticsCommonModule.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\UnityEngine.PropertiesModule.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\UnityEngine.HierarchyCoreModule.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\UnityEngine.InputForUIModule.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\UnityEngine.TerrainModule.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Unity.Burst.dll
