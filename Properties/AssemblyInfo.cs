@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 using MelonLoader;
-using ColorScreenMod; // The namespace of your mod class
+using ColorScreen; // The namespace of your mod class
 using System;
 // ...
 [assembly: MelonInfo(typeof(main), BuildInfo.ModName, BuildInfo.ModVersion, BuildInfo.Author)]

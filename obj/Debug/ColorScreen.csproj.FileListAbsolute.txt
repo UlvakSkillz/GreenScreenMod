@@ -49,10 +49,6 @@ C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Unity.Render
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Unity.Mathematics.dll
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\MelonLoader.xml
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\obj\Debug\ColorScreen.csproj.CoreCompileInputs.cache
-C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\ColorScreenMod.dll
-C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\ColorScreenMod.pdb
-C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\obj\Debug\ColorScreenMod.dll
-C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\obj\Debug\ColorScreenMod.pdb
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\obj\Debug\ColorScreen.csproj.AssemblyReference.cache
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Il2CppSystem.Data.dll
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Il2CppSystem.Runtime.Serialization.dll
@@ -110,3 +106,7 @@ C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\UnityEngine.
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\UnityEngine.InputForUIModule.dll
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\UnityEngine.TerrainModule.dll
 C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\Unity.Burst.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\ColorScreen.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\bin\Debug\ColorScreen.pdb
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\obj\Debug\ColorScreen.dll
+C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\obj\Debug\ColorScreen.pdb

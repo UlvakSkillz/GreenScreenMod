@@ -7,8 +7,8 @@
     <ProjectGuid>{0BBB5E6E-12CA-4068-8A79-6605427FBA1B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ColorScreenMod</RootNamespace>
-    <AssemblyName>ColorScreenMod</AssemblyName>
+    <RootNamespace>ColorScreen</RootNamespace>
+    <AssemblyName>ColorScreen</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -109,6 +109,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\obj\Debug\ColorScreenMod.dll" "F:\SteamLibrary\steamapps\common\RUMBLE\Mods" /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy "C:\Users\austi\source\repos\GreenScreenMod\GreenScreenMod\obj\Debug\ColorScreen.dll" "F:\SteamLibrary\steamapps\common\RUMBLE\Mods" /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -5,12 +5,12 @@ using UnityEngine;
 using RumbleModUI;
 using System.Globalization;
 
-namespace ColorScreenMod
+namespace ColorScreen
 {
     public static class BuildInfo
     {
         public const string ModName = "Color Screen";
-        public const string ModVersion = "2.4.0";
+        public const string ModVersion = "2.4.1";
         public const string Author = "UlvakSkillz";
     }
     public class main : MelonMod
@@ -25,6 +25,7 @@ namespace ColorScreenMod
         private Color wallColor = hexToColor(wallColorText);
         private Color floorColor = hexToColor(floorColorText);
         private static Mod ColorScreen = new Mod();
+		private Shader unlit;
 
         private void UIInit()
         {
@@ -33,6 +34,7 @@ namespace ColorScreenMod
 
         public override void OnLateInitializeMelon()
         {
+            unlit = Shader.Find("Universal Render Pipeline/Unlit");
             ColorScreen.ModName = BuildInfo.ModName;
             ColorScreen.ModVersion = BuildInfo.ModVersion;
             ColorScreen.SetFolder("ColorScreen");
@@ -132,7 +134,7 @@ namespace ColorScreenMod
 			{
 				GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 				cube.name = "ColorScreen";
-				cube.GetComponent<Renderer>().material.shader = Shader.Find("Universal Render Pipeline/Lit");
+				cube.GetComponent<Renderer>().material.shader = unlit;
 				cube.GetComponent<MeshRenderer>().material.color = wallColor;
 				PlayerManager playerManager = PlayerManager.instance;
 				cube.transform.rotation = Quaternion.Euler(0, playerManager.localPlayer.Controller.gameObject.transform.GetChild(2).GetChild(0).GetChild(0).transform.rotation.eulerAngles.y, 0);
@@ -153,7 +155,7 @@ namespace ColorScreenMod
 			{
 				GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 				cube.name = "ColorPlain";
-				cube.GetComponent<Renderer>().material.shader = Shader.Find("Universal Render Pipeline/Lit");
+				cube.GetComponent<Renderer>().material.shader = unlit;
 				cube.GetComponent<MeshRenderer>().material.color = floorColor;
 				cube.transform.position = PlayerManager.instance.localPlayer.Controller.gameObject.transform.GetChild(2).GetChild(3).position;
 				cube.transform.position = new Vector3(cube.transform.position.x, cube.transform.position.y - 0.102f, cube.transform.position.z);
