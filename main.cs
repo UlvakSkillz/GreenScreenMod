@@ -10,7 +10,7 @@ namespace ColorScreen
     public static class BuildInfo
     {
         public const string ModName = "Color Screen";
-        public const string ModVersion = "2.4.1";
+        public const string ModVersion = "2.5.0";
         public const string Author = "UlvakSkillz";
     }
     public class main : MelonMod

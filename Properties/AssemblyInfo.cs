@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using MelonLoader;
 using ColorScreen; // The namespace of your mod class
 using System;
+using BuildInfo = ColorScreen.BuildInfo;
 // ...
 [assembly: MelonInfo(typeof(main), BuildInfo.ModName, BuildInfo.ModVersion, BuildInfo.Author)]
 [assembly: MelonGame("Buckethead Entertainment", "RUMBLE")]
